@@ -4,5 +4,35 @@
   <h1>Countdown to 2026</h1>
 </head>
 <body>
-  <iframe width="500" height="154" src="https://w2.countingdownto.com/6531977" frameborder="0"></iframe>
+<div id="countdown"></div>
+
+<script>
+  (function () {
+    // Target date: Jan 1, 2026
+    const target = new Date(2026, 0, 1, 0, 0, 0, 0).getTime();
+    const el = document.getElementById("countdown");
+
+    function update() {
+      const now = Date.now();
+      let diff = target - now;
+
+      if (diff <= 0) {
+        el.textContent = "Happy New Year!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days  = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= days * 86400000;
+      const hours = Math.floor(diff / (1000 * 60 * 60)); diff -= hours * 3600000;
+      const mins  = Math.floor(diff / (1000 * 60)); diff -= mins * 60000;
+      const secs  = Math.floor(diff / 1000);
+
+      el.textContent = `${days} days ${hours} hours ${mins} minutes ${secs} seconds until Jan 1, 2026`;
+    }
+
+    update();
+    const timer = setInterval(update, 1000);
+  })();
+</script>
+
 </body>
